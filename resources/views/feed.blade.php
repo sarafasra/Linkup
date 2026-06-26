@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LinkUp Feed</title>
+</head>
+<body>
+
+    <h1>LinkUp Feed</h1>
+
+    @foreach($posts as $post)
+        <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+            <h3>{{ $post->user->name }}</h3>
+            <p>{{ $post->user->headline }}</p>
+            <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}" width="80" height="80">
+            <hr>
+            <p>{{ $post->content }}</p>
+        </div>
+    @endforeach
+
+</body>
+</html>
