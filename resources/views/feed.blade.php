@@ -13,7 +13,7 @@
             <p>{{ $post->user->headline }}</p>
             <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}" width="80" height="80">
             <hr>
-            <p>{{ $post->content }}</p>
+            <p>{{ $post->content }}</p>  
         </div>
     @endforeach
 
