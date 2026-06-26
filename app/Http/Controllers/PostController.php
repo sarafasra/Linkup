@@ -19,4 +19,4 @@ class PostController extends Controller
 
         return view('feed', compact('posts'));
     }
-}  
+}   
