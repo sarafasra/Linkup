@@ -23,7 +23,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-             'headline' => 'required|min:8|max:255',
+             'headline' => 'required|string|max:255',
              'password' => 'required|min:8|confirmed',
         ]);
 
@@ -35,5 +35,19 @@ class AuthController extends Controller
         ]);
         Auth::login($user);
         return redirect('/feed');
+    }
+
+    public function login (Request $request){
+        if(Auth::attempt([
+            'email' => $request->email,
+         'password' => $request->password])){
+                   
+         return redirect('/feed');
+        }
+        return back();
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
     }
 }
