@@ -111,6 +111,14 @@
     <h1 style="margin-bottom:20px;">News Feed</h1>
 
     @foreach($posts as $post)
+    <a href="{{ route('posts.edit', $post->id) }}">Modifier</a>
+
+<form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit">Supprimer</button>
+</form>
 
         <div class="post">
 

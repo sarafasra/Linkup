@@ -38,5 +38,11 @@ public function update(StorePostRequest $request, Post $post){
     return redirect()->route('feed.index');
 
 }
+public function destroy(Post $post)
+{
+    $post->delete();
+
+    return redirect()->route('feed.index');
+}
     
 }    
