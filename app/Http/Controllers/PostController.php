@@ -2,8 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 { 
@@ -19,7 +20,11 @@ class PostController extends Controller
     return view ('posts.create');
     }
 
-    public function store(){
-
+public function store(StorePostRequest $request){
+                   Post::create([
+                    'content' => $request->content,
+                    'user_id' => Auth::id(),
+                   ]);
+                   return redirect()->route('feed.index');
     }
 }    
