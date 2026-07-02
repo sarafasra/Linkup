@@ -90,6 +90,46 @@
             font-size:16px;
             line-height:1.6;
         }
+
+        .actions{
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+            margin-top:20px;
+        }
+
+        .actions form{
+            margin:0;
+        }
+
+        .btn-edit,
+        .btn-delete{
+            padding:8px 16px;
+            border:none;
+            border-radius:6px;
+            color:white;
+            text-decoration:none;
+            cursor:pointer;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        .btn-edit{
+            background:#0A66C2;
+        }
+
+        .btn-edit:hover{
+            background:#084b91;
+        }
+
+        .btn-delete{
+            background:#dc3545;
+        }
+
+        .btn-delete:hover{
+            background:#b52a37;
+        }
+
     </style>
 
 </head>
@@ -111,35 +151,44 @@
     <h1 style="margin-bottom:20px;">News Feed</h1>
 
     @foreach($posts as $post)
-    <a href="{{ route('posts.edit', $post->id) }}">Modifier</a>
 
-<form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
+    <div class="post">
 
-    <button type="submit">Supprimer</button>
-</form>
+        <div class="user">
 
-        <div class="post">
+            <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}">
 
-            <div class="user">
-
-                <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}">
-
-                <div>
-                    <h3>{{ $post->user->name }}</h3>
-                    <p class="headline">{{ $post->user->headline }}</p>
-                </div>
-
+            <div>
+                <h3>{{ $post->user->name }}</h3>
+                <p class="headline">{{ $post->user->headline }}</p>
             </div>
 
-            <hr>
+        </div>
 
-            <p class="content">
-                {{ $post->content }}
-            </p>
+        <hr>
+
+        <p class="content">
+            {{ $post->content }}
+        </p>
+
+        <div class="actions">
+
+            <a href="{{ route('posts.edit', $post->id) }}" class="btn-edit">
+                Modifier
+            </a>
+
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="btn-delete">
+                    Supprimer
+                </button>
+            </form>
 
         </div>
+
+    </div>
 
     @endforeach
 
