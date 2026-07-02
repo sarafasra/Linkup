@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
@@ -20,6 +22,7 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
+        // dd($request);
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -33,8 +36,10 @@ class AuthController extends Controller
             'headline' => $request->headline,
             'password' => Hash::make($request->password),
         ]);
+
+        event(new Registered($user));
         Auth::login($user);
-        return redirect('/feed');
+        return redirect(route('feed.index',absolute:false));
     }
 
     public function login (Request $request){
@@ -42,7 +47,8 @@ class AuthController extends Controller
             'email' => $request->email,
          'password' => $request->password])){
                    
-         return redirect('/feed');
+        //  dd($request);
+        return redirect(route('feed.index',absolute:false));
         }
         return back();
     }

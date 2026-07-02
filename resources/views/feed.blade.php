@@ -1,21 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkUp Feed</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f3f2ef;
+        }
+
+        header{
+            background:#0A66C2;
+            color:white;
+            padding:15px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        header h2{
+            font-size:28px;
+        }
+
+        .logout-btn{
+            background:white;
+            color:#0A66C2;
+            border:none;
+            padding:10px 18px;
+            border-radius:6px;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .logout-btn:hover{
+            background:#e6e6e6;
+        }
+
+        .container{
+            width:700px;
+            margin:30px auto;
+        }
+
+        .post{
+            background:white;
+            padding:20px;
+            margin-bottom:20px;
+            border-radius:10px;
+            box-shadow:0 3px 10px rgba(0,0,0,.1);
+        }
+
+        .user{
+            display:flex;
+            align-items:center;
+            margin-bottom:15px;
+        }
+
+        .user img{
+            width:70px;
+            height:70px;
+            border-radius:50%;
+            margin-right:15px;
+            object-fit:cover;
+        }
+
+        .user h3{
+            color:#0A66C2;
+        }
+
+        .headline{
+            color:gray;
+            font-size:14px;
+        }
+
+        hr{
+            margin:15px 0;
+            border:0;
+            border-top:1px solid #ddd;
+        }
+
+        .content{
+            font-size:16px;
+            line-height:1.6;
+        }
+    </style>
+
 </head>
 <body>
 
-    <h1>LinkUp Feed</h1>
+<header>
+
+    <h2>LinkUp</h2>
+
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button class="logout-btn" type="submit">Logout</button>
+    </form>
+
+</header>
+
+<div class="container">
+
+    <h1 style="margin-bottom:20px;">News Feed</h1>
 
     @foreach($posts as $post)
-        <div style="border:1px solid #ccc; margin:10px; padding:10px;">
-            <h3>{{ $post->user->name }}</h3>
-            <p>{{ $post->user->headline }}</p>
-            <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}" width="80" height="80">
+
+        <div class="post">
+
+            <div class="user">
+
+                <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}">
+
+                <div>
+                    <h3>{{ $post->user->name }}</h3>
+                    <p class="headline">{{ $post->user->headline }}</p>
+                </div>
+
+            </div>
+
             <hr>
-            <p>{{ $post->content }}</p>  
+
+            <p class="content">
+                {{ $post->content }}
+            </p>
+
         </div>
+
     @endforeach
+
+</div>
 
 </body>
 </html>
