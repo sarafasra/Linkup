@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 Route::middleware('auth')->group(function () {
 
     Route::get('/feed', [PostController::class, 'index'])->name('feed.index');
-    Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 });
 
