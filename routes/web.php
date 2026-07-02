@@ -4,8 +4,12 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-Route::get('/feed', [PostController::class, 'index'])->name('feed.index')->middleware('auth','verified');
+Route::middleware('auth')->group(function () {
 
+    Route::get('/feed', [PostController::class, 'index'])->name('feed.index');
+    Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+});
 
 
 
