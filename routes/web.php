@@ -9,6 +9,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/feed', [PostController::class, 'index'])->name('feed.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/posts/{post}/edit' , [PostController::class, 'edit'])->name(('posts.edit'));
+    Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 });
 
 
