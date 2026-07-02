@@ -27,4 +27,16 @@ public function store(StorePostRequest $request){
                    ]);
                    return redirect()->route('feed.index');
     }
+
+    public function edit(Post $post){
+        return view('posts.edit',compact('post'));
+    }
+public function update(StorePostRequest $request, Post $post){
+    $post->update([
+        'content' =>$request->content,
+    ]);
+    return redirect()->route('feed.index');
+
+}
+    
 }    
