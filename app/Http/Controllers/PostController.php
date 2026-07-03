@@ -29,9 +29,11 @@ public function store(StorePostRequest $request){
     }
 
     public function edit(Post $post){
+        $this->authorize('update' , $post);
         return view('posts.edit',compact('post'));
     }
 public function update(StorePostRequest $request, Post $post){
+    $this->authorize('update' , $post);
     $post->update([
         'content' =>$request->content,
     ]);
@@ -40,6 +42,7 @@ public function update(StorePostRequest $request, Post $post){
 }
 public function destroy(Post $post)
 {
+    $this->authorize('delete' , $post);
     $post->delete();
 
     return redirect()->route('feed.index');

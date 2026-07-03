@@ -22,7 +22,6 @@ class AuthController extends Controller
     }
 
     public function register(Request $request){
-        // dd($request);
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -47,7 +46,6 @@ class AuthController extends Controller
             'email' => $request->email,
          'password' => $request->password])){
                    
-        //  dd($request);
         return redirect(route('feed.index',absolute:false));
         }
         return back();

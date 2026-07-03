@@ -171,22 +171,26 @@
             {{ $post->content }}
         </p>
 
-        <div class="actions">
+<div class="actions">
 
-            <a href="{{ route('posts.edit', $post->id) }}" class="btn-edit">
-                Modifier
-            </a>
+    @can('update', $post)
+        <a href="{{ route('posts.edit', $post->id) }}" class="btn-edit">
+            Modifier
+        </a>
+    @endcan
 
-            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
+    @can('delete', $post)
+        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
 
-                <button type="submit" class="btn-delete">
-                    Supprimer
-                </button>
-            </form>
+            <button type="submit" class="btn-delete">
+                Supprimer
+            </button>
+        </form>
+    @endcan
 
-        </div>
+</div>
 
     </div>
 
