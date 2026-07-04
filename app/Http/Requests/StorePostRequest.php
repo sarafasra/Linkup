@@ -24,6 +24,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'content' => 'required|min:10',
+            'profile_photo' => 'nullable|image|max:2048'
         ];
     }
 }

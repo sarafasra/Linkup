@@ -177,7 +177,7 @@
 
         <div class="user">
 
-            <img src="{{ $post->user->image_url }}" alt="{{ $post->user->name }}">
+            <img src="{{ asset('images/' . $post->user->image_url)}}" alt="{{ $post->user->name }}">
 
             <div>
                 <h3>{{ $post->user->name }}</h3>

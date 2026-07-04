@@ -115,7 +115,7 @@
 
         <h1>Créer une nouvelle publication</h1>
 
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -123,6 +123,18 @@
                 name="content"
                 placeholder="Exprimez-vous..."
             >{{ old('content') }}</textarea>
+
+            <div>
+                    <label class="block text-xs font-semibold text-[rgba(0,0,0,0.6)] mb-1.5">Profile Photo</label>
+                    <div class="flex items-center gap-4 p-3 border border-dashed border-[rgba(0,0,0,0.2)] rounded-lg bg-[rgba(0,0,0,0.01)]">
+                        
+                        <div class="flex-1">
+                            <input type="file" name="profile_photo" id="profile_photo" class="text-xs text-[rgba(0,0,0,0.6)] file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-[rgba(10,102,194,0.08)] file:text-[#0a66c2] hover:file:bg-[rgba(10,102,194,0.15)] file:cursor-pointer transition">
+                            <p class="text-[10px] text-[rgba(0,0,0,0.4)] mt-1">Supports PNG, JPG, or GIF up to 2MB.</p>
+                        </div>
+                    </div>
+                </div>
+
 
             @error('content')
                 <p class="error">{{ $message }}</p>
