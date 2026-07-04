@@ -43,6 +43,19 @@
         .logout-btn:hover{
             background:#e6e6e6;
         }
+        .create-btn{
+    background:#0A66C2;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:6px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.create-btn:hover{
+    background:#084b91;
+}
 
         .container{
             width:700px;
@@ -148,7 +161,15 @@
 
 <div class="container">
 
-    <h1 style="margin-bottom:20px;">News Feed</h1>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+
+        <h1>News Feed</h1>
+
+        <a href="{{ route('posts.create') }}" class="create-btn">
+            + Créer un post
+        </a>
+
+    </div>
 
     @foreach($posts as $post)
 
