@@ -173,6 +173,8 @@
 
     @foreach($posts as $post)
 
+    
+
     <div class="post">
 
         <div class="user">
@@ -198,6 +200,52 @@
             {{ $post->content }}
             
         </p>
+
+        <hr>
+
+<h4>{{ $post->comments->count() }} Commentaires</h4>
+
+<form action="{{ route('comments.store', $post) }}" method="POST">
+
+    @csrf
+
+    <textarea
+        name="content"
+        rows="2"
+        placeholder="Écrire un commentaire..."
+        style="width:100%; padding:10px;"
+        required
+    ></textarea>
+
+    <br><br>
+
+    <button
+        type="submit"
+        style="background:#0A66C2;color:white;border:none;padding:8px 15px;border-radius:5px;">
+        Commenter
+    </button>
+
+</form>
+
+<br>
+
+@foreach($post->comments as $comment)
+
+<div style="background:#f5f5f5;padding:10px;border-radius:6px;margin-bottom:10px;">
+
+    <strong>{{ $comment->user->name }}</strong>
+
+    <p style="font-size:13px;color:gray;">
+    {{ $comment->created_at->diffForHumans() }}
+    </p>
+
+    <p>
+        {{ $comment->content }}
+    </p>
+
+</div>
+
+@endforeach
 
 <div class="actions">
 
