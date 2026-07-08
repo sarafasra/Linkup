@@ -313,7 +313,7 @@
                     Supprimer
                 </button>
             </form>
-            @endcan 
+            @endcan  
  
         </div> 
 
