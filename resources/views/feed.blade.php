@@ -181,15 +181,22 @@
 
             <div>
                 <h3>{{ $post->user->name }}</h3>
-                <p class="headline">{{ $post->user->headline }}</p>
-            </div>
 
+                @if($post->user->is_open_to_work)
+                <span style="color: green">is open to work</span>
+                @endif
+                <p class="headline">
+                    {{ $post->user->headline }}
+
+                </p>
+            </div>
         </div>
 
         <hr>
 
         <p class="content">
             {{ $post->content }}
+            
         </p>
 
 <div class="actions">

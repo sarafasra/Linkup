@@ -38,9 +38,7 @@ class PostController extends Controller
 
 
 
-        // Auth::user()->user->update([
-        //     'image_url' => $imagename
-        // ]);
+       
         Post::create([
             'content' => $request->content,
             'user_id' => Auth::id(),
