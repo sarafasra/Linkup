@@ -315,7 +315,7 @@
             </form>
             @endcan 
  
-        </div>
+        </div> 
 
         <p style="margin-top:10px;">
             {{ $comment->content }}
