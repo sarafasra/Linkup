@@ -143,6 +143,70 @@
             background:#b52a37;
         }
 
+        .comments-section{
+    margin-top:20px;
+}
+
+.comment-box{
+    background:#f3f2ef;
+    padding:12px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+.comment-box strong{
+    color:#0A66C2;
+}
+
+.comment-headline{
+    color:gray;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.comment-date{
+    color:#777;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.comment-form textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    resize:none;
+}
+
+.comment-form textarea:focus{
+    border-color:#0A66C2;
+    outline:none;
+}
+
+.comment-btn{
+    margin-top:10px;
+    background:#0A66C2;
+    color:white;
+    border:none;
+    padding:8px 18px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.comment-btn:hover{
+    background:#084b91;
+}
+
+.delete-comment{
+    margin-top:10px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:6px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
     </style>
 
 </head>
@@ -203,49 +267,65 @@
 
         <hr>
 
-<h4>{{ $post->comments->count() }} Commentaires</h4>
+<div class="comments-section">
 
-<form action="{{ route('comments.store', $post) }}" method="POST">
+    <h4>{{ $post->comments->count() }} Commentaires</h4>
 
-    @csrf
+    <form class="comment-form" action="{{ route('comments.store', $post) }}" method="POST">
+        @csrf
 
-    <textarea
-        name="content"
-        rows="2"
-        placeholder="Écrire un commentaire..."
-        style="width:100%; padding:10px;"
-        required
-    ></textarea>
+        <textarea
+            name="content"
+            rows="2"
+            placeholder="Écrire un commentaire..."
+            required
+        ></textarea>
 
-    <br><br>
+        <button class="comment-btn" type="submit">
+            Commenter
+        </button>
+    </form>
 
-    <button
-        type="submit"
-        style="background:#0A66C2;color:white;border:none;padding:8px 15px;border-radius:5px;">
-        Commenter
-    </button>
+    @foreach($post->comments as $comment)
 
-</form>
+    <div class="comment-box">
 
-<br>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
 
-@foreach($post->comments as $comment)
+            <div>
+                <strong>{{ $comment->user->name }}</strong>
 
-<div style="background:#f5f5f5;padding:10px;border-radius:6px;margin-bottom:10px;">
+                <p class="comment-headline">
+                    {{ $comment->user->headline }}
+                </p>
 
-    <strong>{{ $comment->user->name }}</strong>
+                <p class="comment-date">
+                    {{ $comment->created_at->diffForHumans() }}
+                </p>
+            </div>
 
-    <p style="font-size:13px;color:gray;">
-    {{ $comment->created_at->diffForHumans() }}
-    </p>
+            @can('delete', $comment)
+            <form action="{{ route('comments.destroy', $comment) }}" method="POST">
+                @csrf
+                @method('DELETE')
 
-    <p>
-        {{ $comment->content }}
-    </p>
+                <button class="delete-comment" type="submit">
+                    Supprimer
+                </button>
+            </form>
+            @endcan
+
+        </div>
+
+        <p style="margin-top:10px;">
+            {{ $comment->content }}
+        </p>
+
+    </div>
+
+    @endforeach
 
 </div>
-
-@endforeach
 
 <div class="actions">
 
