@@ -445,7 +445,7 @@ function toggleComment(id){
     }else{
 
         box.style.display = "none"; 
-
+ 
     }
 
 }
