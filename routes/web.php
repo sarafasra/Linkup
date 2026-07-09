@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 
 Route::get('/', function () {
     return response('OK', 200);
@@ -14,7 +15,7 @@ Route::middleware('auth')->group(function () {
    
     Route::get('/feed', [PostController::class, 'index'])->name('feed.index');
 
-   
+     Route::post('/posts/{post}/like' , [LikeController::class, 'toggle'])->name('posts.like');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');

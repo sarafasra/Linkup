@@ -12,8 +12,11 @@ class PostController extends Controller
 {
     public function index()
     {
-$posts = Post::with(['user', 'comments.user'])->latest()->get();
-        return view('feed', compact('posts'));
+$posts = Post::with([
+    'user',
+    'comments.user',
+    'likes'
+])->latest()->get();        return view('feed', compact('posts'));
     }
 
     public function create()

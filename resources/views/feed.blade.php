@@ -206,6 +206,97 @@
     border-radius:5px;
     cursor:pointer;
 }
+.action-btn{
+    background:none;
+    border:none;
+    color:#555;
+    font-size:15px;
+    cursor:pointer;
+    padding:8px 15px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.action-btn:hover{
+    background:#f3f2ef;
+}
+
+.like-btn.liked{
+    color:#0A66C2;
+    font-weight:bold;
+}
+
+.comments{
+    margin-top:20px;
+}
+
+.comment-form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.comment-form textarea{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:20px;
+    padding:12px 18px;
+    resize:none;
+    background:#f3f2ef;
+}
+
+.comment-form button{
+    width:140px;
+    background:#0A66C2;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.comment{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+}
+
+.comment img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.comment-body{
+    flex:1;
+    background:#f3f2ef;
+    padding:12px;
+    border-radius:12px;
+}
+
+.comment-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:5px;
+}
+
+.comment-header strong{
+    color:#0A66C2;
+}
+
+.comment-header small{
+    color:gray;
+}
+
+.delete-comment{
+    margin-top:8px;
+    background:none;
+    color:#dc3545;
+    border:none;
+    cursor:pointer;
+    font-size:13px;
+}
 
     </style>
 
@@ -281,58 +372,51 @@
             required
         ></textarea>
 
-        <button class="comment-btn" type="submit">
+       <button class="comment-toggle" onclick="toggleComment({{ $post->id }})">
+    💬 Comment ({{ $post->comments->count() }})
+</button>
+
+<div id="comment-form-{{ $post->id }}" class="comment-container" style="display:none;">
+
+    <form action="{{ route('comments.store', $post) }}" method="POST">
+
+        @csrf
+
+        <textarea
+            name="content"
+            rows="2"
+            placeholder="Écrire un commentaire..."
+            required></textarea>
+
+        <button type="submit" class="comment-btn">
             Commenter
         </button>
+
     </form>
 
-    @foreach($post->comments as $comment)
-
-    <div class="comment-box">
-
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-
-            <div>
-                <strong>{{ $comment->user->name }}</strong>
-
-                <p class="comment-headline">
-                    {{ $comment->user->headline }}
-                </p>
-
-                <p class="comment-date">
-                    {{ $comment->created_at->diffForHumans() }}
-                </p>
-            </div>
-
-            @can('delete', $comment)
-            <form action="{{ route('comments.destroy', $comment) }}" method="POST">
-                @csrf
-                @method('DELETE')
-
-                <button class="delete-comment" type="submit">
-                    Supprimer
-                </button>
-            </form>
-            @endcan  
- 
-        </div> 
-
-        <p style="margin-top:10px;">
-            {{ $comment->content }}
-        </p>
-
-    </div>
-
-    @endforeach
+</div>
 
 </div>
 
 <div class="actions">
+<form action="{{ route('posts.like', $post) }}" method="POST">
+    @csrf
+
+    @php
+        $liked = $post->likes->contains('user_id', auth()->id());
+    @endphp
+
+    <button type="submit" class="action-btn like-btn {{ $liked ? 'liked' : '' }}">
+        ❤️  Like
+        <span>{{ $post->likes->count() }}</span>
+    </button>
+</form>
 
     @can('update', $post)
         <a href="{{ route('posts.edit', $post->id) }}" class="btn-edit">
             Modifier
         </a>
+        
     @endcan
 
     @can('delete', $post)
