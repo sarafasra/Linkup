@@ -5,6 +5,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
+
 
 Route::get('/', function () {
     return response('OK', 200);
@@ -25,7 +27,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
         ->name('comments.store');
-
+Route::get('/users/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::delete('/comments/{comment}' , [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
