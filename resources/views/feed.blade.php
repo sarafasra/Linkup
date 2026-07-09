@@ -334,11 +334,16 @@
 
         <div class="user">
 
-            <img src="{{ asset('images/' . $post->user->image_url)}}" alt="{{ $post->user->name }}">
-
+<a href="{{ route('profile.show',$post->user) }}">
+    <img src="{{ asset('images/' . $post->user->image_url) }}" alt="">
+</a>
             <div>
-                <h3>{{ $post->user->name }}</h3>
-
+<h3>
+    <a href="{{ route('profile.show',$post->user) }}"
+       style="text-decoration:none;color:#0A66C2;">
+        {{ $post->user->name }}
+    </a>
+</h3>
                 @if($post->user->is_open_to_work)
                 <span style="color: green">is open to work</span>
                 @endif
