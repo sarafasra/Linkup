@@ -125,7 +125,7 @@
             >{{ old('content') }}</textarea>
 
             <div>
-                    <label class="block text-xs font-semibold text-[rgba(0,0,0,0.6)] mb-1.5">Profile Photo</label>
+                    {{-- <label class="block text-xs font-semibold text-[rgba(0,0,0,0.6)] mb-1.5">Profile Photo</label>
                     <div class="flex items-center gap-4 p-3 border border-dashed border-[rgba(0,0,0,0.2)] rounded-lg bg-[rgba(0,0,0,0.01)]">
                         
                         <div class="flex-1">
@@ -133,7 +133,7 @@
                             <p class="text-[10px] text-[rgba(0,0,0,0.4)] mt-1">Supports PNG, JPG, or GIF up to 2MB.</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
 
             @error('content')

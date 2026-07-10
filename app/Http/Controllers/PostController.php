@@ -27,16 +27,17 @@ $posts = Post::with([
 
     public function store(StorePostRequest $request)
     {
-        $image = $request->file('profile_photo');
+        
+        // $image = $request->file('profile_photo');
 
-        $imagename = time() . '.' . $image->getClientOriginalExtension();
+        // $imagename = time() . '.' . $image->getClientOriginalExtension();
 
-        $image->move(public_path('images'), $imagename);
+        // $image->move(public_path('images'), $imagename);
 
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $user->image_url = $imagename;
-        $user->save();
+        // $user->image_url = $imagename;
+        // $user->save();
 
 
 
