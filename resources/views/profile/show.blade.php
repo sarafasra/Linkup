@@ -197,7 +197,23 @@
                     🟢 Open To Work
                 </div>
             @endif
+@if(auth()->id()==$user->id)
 
+<a href="{{ route('profile.edit') }}"
+style="
+display:inline-block;
+margin-top:20px;
+padding:10px 20px;
+background:#0A66C2;
+color:white;
+text-decoration:none;
+border-radius:8px;">
+
+Modifier mon profil
+
+</a>
+
+@endif
         </div>
 
     </div>
