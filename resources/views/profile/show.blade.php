@@ -204,7 +204,7 @@
             @endif
 
             @if($user->is_open_to_work)
-                <div class="badge">
+                <div class="badge"> 
                     🟢 Open To Work
                 </div>
             @endif
