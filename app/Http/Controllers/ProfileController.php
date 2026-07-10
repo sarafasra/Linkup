@@ -8,12 +8,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function show(User $user)
-    {
-        $posts = $user->posts()->latest()->get();
+   public function show(User $user)
+{
+    $posts = $user->posts()->latest()->get();
 
-        return view('profile.show', compact('user', 'posts'));
-    }
+    $followersCount = $user->followers()->count();
+    $followingCount = $user->following()->count();
+
+    return view('profile.show', compact(
+        'user',
+        'posts',
+        'followersCount',
+        'followingCount'
+    ));
+}
 
     public function edit()
     {

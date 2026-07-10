@@ -190,6 +190,17 @@
                 <p class="company">
                     {{ $user->company }}
                 </p>
+                <div style="margin-top:20px;display:flex;justify-content:center;gap:40px;font-size:18px;">
+    <div>
+        <strong>{{ $followersCount }}</strong><br>
+        Followers
+    </div>
+
+    <div>
+        <strong>{{ $followingCount }}</strong><br>
+        Following
+    </div>
+</div>
             @endif
 
             @if($user->is_open_to_work)
@@ -197,7 +208,7 @@
                     🟢 Open To Work
                 </div>
             @endif
-@if(auth()->id()==$user->id)
+@if(auth()->id() == $user->id)
 
 <a href="{{ route('profile.edit') }}"
 style="
@@ -212,6 +223,41 @@ border-radius:8px;">
 Modifier mon profil
 
 </a>
+
+@else
+
+<form action="{{ route('users.follow', $user) }}" method="POST" style="margin-top:20px;">
+    @csrf
+
+    @if(auth()->user()->following->contains($user->id))
+
+        <button type="submit"
+        style="
+        padding:10px 25px;
+        border:none;
+        border-radius:8px;
+        background:#666;
+        color:white;
+        cursor:pointer;">
+            Following
+        </button>
+
+    @else
+
+        <button type="submit"
+        style="
+        padding:10px 25px;
+        border:none;
+        border-radius:8px;
+        background:#0A66C2;
+        color:white;
+        cursor:pointer;">
+            + Follow
+        </button>
+
+    @endif
+
+</form>
 
 @endif
         </div>
