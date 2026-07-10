@@ -1,24 +1,34 @@
 # LinkUp
 
-LinkUp est une application web développée avec Laravel 12 qui permet aux utilisateurs de partager des publications professionnelles, similaire à un mini réseau social.
-
----
+LinkUp est une plateforme de réseau social professionnel inspirée de LinkedIn. Les utilisateurs peuvent publier du contenu, interagir avec les publications et développer leur réseau professionnel.
 
 ## Fonctionnalités
 
-- Inscription d'un nouvel utilisateur
-- Connexion et déconnexion
-- Authentification avec Laravel
-- Création d'une publication
-- Modification d'une publication
-- Suppression d'une publication
-- Fil d'actualité (Feed)
-- Validation des formulaires avec Form Requests
-- Protection des routes avec Middleware
-- Gestion des autorisations avec Policies
-- Interface simple et responsive
+### Authentification
+- Inscription
+- Connexion
+- Déconnexion
 
----
+### Gestion des publications
+- Créer une publication
+- Modifier sa publication
+- Supprimer sa publication
+- Consulter le fil d'actualité
+
+### Interactions
+- Ajouter un commentaire
+- Supprimer son commentaire
+- Aimer / Retirer un Like
+
+### Profil
+- Consulter le profil public d'un utilisateur
+- Modifier son profil
+- Mettre à jour la photo, le titre professionnel et l'entreprise
+
+### Réseau
+- Follow / Unfollow
+- Affichage du nombre de Followers
+- Affichage du nombre de Following
 
 ## Technologies utilisées
 
@@ -29,99 +39,18 @@ LinkUp est une application web développée avec Laravel 12 qui permet aux utili
 - HTML
 - CSS
 
----
-
 ## Installation
 
-### 1. Cloner le projet
-
 ```bash
-git clone https://github.com/votre-compte/linkup.git
-```
-
-### 2. Accéder au dossier
-
-```bash
-cd linkup
-```
-
-### 3. Installer les dépendances
-
-```bash
+git clone <repository-url>
+cd LinkUp
 composer install
-```
-
-### 4. Copier le fichier d'environnement
-
-```bash
 cp .env.example .env
-```
-
-### 5. Générer la clé
-
-```bash
 php artisan key:generate
-```
-
-### 6. Configurer la base de données
-
-Modifier le fichier `.env`
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=linkup
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-### 7. Exécuter les migrations
-
-```bash
 php artisan migrate
-```
-
-### 8. Lancer le serveur
-
-```bash
 php artisan serve
 ```
 
----
+## Auteur
 
-## Structure du projet
-
-```
-app/
-│── Http/
-│   ├── Controllers/
-│   ├── Requests/
-│── Models/
-│── Policies/
-
-resources/
-│── views/
-│   ├── auth/
-│   ├── posts/
-│   └── feed.blade.php
-
-routes/
-└── web.php
-```
-
----
-
-## Sécurité
-
-Le projet utilise :
-
-- Middleware `auth`
-- Form Request (`StorePostRequest`)
-- Laravel Policies (`PostPolicy`)
-- Directive Blade `@can`
-
-Un utilisateur ne peut modifier ou supprimer que ses propres publications.
-
----
-
+Sara Fasraoui
